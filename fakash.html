@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikaidou</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="fakash.css">
+</head>
+
+<body>
+    <!-- loding -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>sabar loding king...</h2>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                N.A.T.R.I
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Beranda</a></li>
+                <li><a href="#categories" class="nav-link">Kategori</a></li>
+                <li><a href="#products" class="nav-link">Produk</a></li>
+                <li><a href="#features" class="nav-link">Fitur</a></li>
+                <li><a href="#contact" class="nav-link">Kontak</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" onclick="bukaPencarian()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="icon-btn" onclick="bukaKeranjang()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <button class="icon-btn" id="userIcon" onclick="toggleUserMenu()">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="user-menu" id="userMenu">
+                        <div class="user-info" id="userInfo" style="display: none;">
+                            <div class="user-name" id="userName">User Name</div>
+                        </div>
+                        <a href="#" class="user-menu-item" id="loginBtn" onclick="bukaLogin()">
+                            <i class="fas fa-sign-in-alt"></i> Masuk
+                        </a>
+                        <a href="#" class="user-menu-item" id="profileBtn" style="display: none;"
+                            onclick="bukaProfil()">
+                            <i class="fas fa-user-circle"></i> Profil Saya
+                        </a>
+                        <a href="#" class="user-menu-item" id="ordersBtn" style="display: none;"
+                            onclick="bukaPesanan()">
+                            <i class="fas fa-shopping-bag"></i> Pesanan Saya
+                        </a>
+                        <a href="#" class="user-menu-item" id="adminBtn" style="display: none;"
+                            onclick="bukaAdminPanel()">
+                            <i class="fas fa-cog"></i> Admin Panel
+                        </a>
+                        <a href="#" class="user-menu-item" id="logoutBtn" style="display: none;" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Temukan Barang Impian lo</h1>
+                <p>Koleksi lengkap figure anime, peralatan dapur, dekorasi kamar, dan berbagai barang hobby dan
+                    kebutuhan favoritmu!</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollKeProduk()">
+                        <i class="fas fa-shopping-bag"></i> Belanja Sekarang
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollNewsletter()">
+                        <i class="fas fa-gift"></i> Promo Spesial
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://i.pinimg.com/1200x/2b/aa/64/2baa64cb280fefe1907819f99039bf7f.jpg" alt="Hero Image"
+                    style="width: 100%; border-radius: 20px;">
+            </div>
+        </div>
+    </section>
+
+
+    <section class="banner-section">
+        <div class="banner-container" id="bannerContainer">
+            <div class="banner-slide">
+                <img src="https://resize.cdn.otakumode.com/ex/1320.280/up/billboard/37c8a56c05c440a7a77038048c136492.jpg.webp" alt="Banner 1">
+            </div>
+            <div class="banner-slide active">
+                <img src="https://dlcdnwebimgs.asus.com/gain/B3961E33-3A90-4AC2-A40D-D83570199513/fwebp/fwebp" alt="Banner 2">
+            </div>
+            <div class="banner-slide">
+                <img src="https://rivalscorner.co.uk/cdn/shop/files/1080x540_Mobile_GQuuuuuuX_Banner.jpg?v=1741350939&width=1500" alt="Banner 3">
+            </div>
+        </div>
+        <div class="banner-dots" id="bannerDots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <h2 class="section-title">Kategori Produk</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterKategori('anime')">
+                <div class="category-icon">🎌</div>
+                <div class="category-name">Figure Anime</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('mokit')">
+                <div class="category-icon">🤖</div>
+                <div class="category-name">Model Kit</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('kitchen')">
+                <div class="category-icon">🍳</div>
+                <div class="category-name">Peralatan Dapur</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('bedroom')">
+                <div class="category-icon">🛏️</div>
+                <div class="category-name">Dekorasi Kamar</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('PC')">
+                <div class="category-icon">🖥️</div>
+                <div class="category-name">PC Part</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('gadget')">
+                <div class="category-icon">💻</div>
+                <div class="category-name">Gadget</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('electronics')">
+                <div class="category-icon">🔌</div>
+                <div class="category-name">Elektronik</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('keychain')">
+                <div class="category-icon">🔑</div>
+                <div class="category-name">Gantungan Kunci</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('fashion')">
+                <div class="category-icon">👕</div>
+                <div class="category-name">Fashion</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('furniture')">
+                <div class="category-icon">🛋️</div>
+                <div class="category-name">Furniture</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('skincare')">
+                <div class="category-icon">👩‍🦰</div>
+                <div class="category-name">Skincare</div>
+            </div>
+            <div class="category-card" onclick="filterKategori('shoe')">
+                <div class="category-icon">👟</div>
+                <div class="category-name">Sepatu</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <h2 class="section-title">Produk Terlaris</h2>
+        <div class="filter-bar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Cari produk..." id="searchInput" onkeypress="handleSearch(event)">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="urutinProduk('all')">Semua</button>
+                <button class="filter-btn" onclick="urutinProduk('limited')">Limited</button>
+                <button class="filter-btn" onclick="urutinProduk('sale')">Diskon</button>
+                <button class="filter-btn" onclick="urutinProduk('popular')">Populer</button>
+            </div>
+        </div>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2 class="section-title">Mengapa Belanja di N.A.T.R.I?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <div class="feature-title">Pengiriman Cepat</div>
+                <div class="feature-desc">Gratis ongkir untuk pembelian di atas Rp 500.000</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <div class="feature-title">Pembayaran Aman</div>
+                <div class="feature-desc">Berbagai metode pembayaran yang aman dan terpercaya</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-title">Bonus & Promo</div>
+                <div class="feature-desc">Dapatkan berbagai bonus dan promo menarik setiap hari</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-title">Garansi Retur</div>
+                <div class="feature-desc">Garansi retur 30 hari jika produk tidak sesuai</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+        <div class="newsletter-content" id="member-sec">
+            <h2>Dapatkan Penawaran Spesial!</h2>
+            <p>Dapatkan diskon 20% untuk pembelian pertama dengan berlangganan newsletter kami</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Masukkan email Anda" required>
+                <button type="submit" class="newsletter-btn">Berlangganan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang N.A.T.R.I</h3>
+                <p>Toko online terlengkap untuk semua kebutuhan Anda. Dari figure anime hingga peralatan rumah tangga.
+                </p>
+                <div class="social-icons">
+                    <a href="https://web.facebook.com/faris.ishm/friends" target="_blank" class="social-icon"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/nikaidouuuu/" target="_blank" class="social-icon"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/6282317761703" target="_blank" class="social-icon"><i
+                            class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Link Cepat</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Cara Belanja</a></li>
+                    <li><a href="#">Pengiriman</a></li>
+                    <li><a href="#">Pengembalian</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kategori</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Figure Anime</a></li>
+                    <li><a href="#">Peralatan Dapur</a></li>
+                    <li><a href="#">Elektronik</a></li>
+                    <li><a href="#">Dekorasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> +62 845-3467-9210</li>
+                    <li><i class="fas fa-envelope"></i> info@NATRI356.gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Ngawi, Indonesia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 N.A.T.R.I. Saki my istri</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Keranjang Belanja</h2>
+                <button class="modal-close" onclick="bukaKeranjang()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <!-- Cart items will be dynamically loaded here -->
+            </div>
+
+            <!-- Coupon Section -->
+            <div class="coupon-section">
+                <h3>Kupon</h3>
+                <div id="couponStatus">
+                    <div class="coupon-input-container">
+                        <input type="text" class="coupon-input" id="couponInput" placeholder="Masukkan kode kupon"
+                            onkeypress="handleCouponInput(event)">
+                        <button class="apply-coupon-btn" onclick="applyCoupon()">Gunakan</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">Rp 0</span>
+                </div>
+                <div class="coupon-discount-row" id="couponDiscountRow" style="display: none;">
+                    <span>Diskon Kupon:</span>
+                    <span id="couponDiscount">-Rp 0</span>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">Rp 0</span>
+                </div>
+                <button class="checkout-btn" onclick="bayarSekarang()">
+                    <i class="fas fa-credit-card"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="quick-view-overlay" id="productModal">
+        <div class="quick-view">
+            <button class="quick-view-close" onclick="tutupProdukModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="quick-view-content">
+                <div>
+                    <img src="" alt="" class="quick-view-image" id="modalProductImage">
+                </div>
+                <div class="quick-view-info">
+                    <h2 id="modalProductName"></h2>
+                    <div class="quick-view-price" id="modalProductPrice"></div>
+                    <div class="product-rating">
+                        <span class="rating-number" id="modalProductRating"></span>
+                    </div>
+                    <div class="quick-view-description" id="modalProductDescription">
+                        <!-- Deskripsi akan dimuat dari Google Sheets -->
+                    </div>
+                    <div class="quick-view-actions">
+                        <button class="quick-view-add-to-cart" id="modalAddToCart">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <button class="login-close" onclick="tutupLogin()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="login-header">
+                <h2>Masuk ke N.A.T.R.I</h2>
+                <p>Masukkan username dan password Anda</p>
+            </div>
+
+            <form class="login-form" onsubmit="login(event)">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" class="form-input" id="username" placeholder="Masukkan username" required>
+                    <div class="error-message" id="usernameError">Username tidak valid</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-input" id="password" placeholder="Masukkan password" required>
+                    <div class="error-message" id="passwordError">Password salah</div>
+                </div>
+                <button type="submit" class="login-btn">Masuk</button>
+            </form>
+
+            <div class="guest-option">
+                <p>Atau lanjutkan sebagai tamu</p>
+                <button class="guest-btn" onclick="loginGuest()">Masuk sebagai Tamu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="receipt-modal" id="receiptModal">
+        <div class="receipt-container">
+            <div class="watermark">N.A.T.R.I</div>
+            <div class="receipt-content">
+                <div class="receipt-header">
+                    <div class="store-logo">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="store-name">N.A.T.R.I</div>
+                    <div class="store-address">Jl. Pusaka Rakyat, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17214,
+                        Indonesia</div>
+                    <div class="store-address">Tel: +62 812-3456-7890</div>
+                </div>
+
+                <div class="receipt-body">
+                    <div class="receipt-section">
+                        <div class="title-struk">Informasi Transaksi</div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">No. Transaksi:</span>
+                            <span class="receipt-info-value" id="transactionId">TRX-20250724-001</span>
+                        </div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">Tanggal:</span>
+                            <span class="receipt-info-value" id="transactionDate">24 Juli 2025</span>
+                        </div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">Waktu:</span>
+                            <span class="receipt-info-value" id="transactionTime">14:35:22</span>
+                        </div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">Kasir:</span>
+                            <span class="receipt-info-value">Admin</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-section">
+                        <div class="title-struk">Informasi Pelanggan</div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">Nama:</span>
+                            <span class="receipt-info-value" id="customerName">Nikaidou</span>
+                        </div>
+                        <div class="receipt-info">
+                            <span class="receipt-info-label">No. HP:</span>
+                            <span class="receipt-info-value" id="customerPhone">08245276345</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-section">
+                        <div class="title-struk">Detail Pembelian</div>
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th class="item-qty">Qty</th>
+                                    <th class="item-price">Harga</th>
+                                    <th class="item-total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receiptItemsTableBody">
+                                <!-- Items will be dynamically loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="receipt-section">
+                        <div class="title-struk">Ringkasan Pembayaran</div>
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal:</span>
+                            <span class="summary-value" id="receiptSubtotal">Rp 0</span>
+                        </div>
+                        <div class="summary-row" id="receiptCouponRow" style="display: none;">
+                            <span class="summary-label">Diskon Kupon:</span>
+                            <span class="summary-value" id="receiptCouponDiscount">-Rp 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Diskon:</span>
+                            <span class="summary-value" id="receiptDiscount">Rp 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Ongkir:</span>
+                            <span class="summary-value" id="receiptShipping">Rp 0</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Total:</span>
+                            <span id="receiptTotalAmount">Rp 0</span>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <div class="receipt-info-label">Metode Pembayaran</div>
+                                <div class="receipt-info-value" id="receiptPaymentMethod">Transfer Bank</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="receipt-footer">
+                    <div class="thank-you">Terima Kasih!</div>
+                    <div class="store-tagline">"N.A.T.R.I - Saki my istri"</div>
+                    <div class="qr-code">
+                        <i class="fas fa-qrcode" style="font-size: 3rem; color: #ccc;"></i>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" onclick="tutupStruk()">
+                            <i class="fas fa-times"></i> Tutup
+                        </button>
+                        <button class="btn btn-primary" onclick="selesaiBelanja()">
+                            <i class="fas fa-home"></i> Kembali ke Beranda
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Floating Action Button -->
+    <div class="sam" onclick="bukaChat()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollKeAtas()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="fakash.js"></script>
+</body>
+
+</html>
